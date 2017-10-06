@@ -3,52 +3,55 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class FamiliaActivity extends AppCompatActivity {
-
+public class FamilyFragment extends Fragment {
     private MediaPlayer mMediaPlayer;
-    private AudioManager mAudioManager;
 
-    private MediaPlayer.OnCompletionListener mOnCompletionListener
-            = new MediaPlayer.OnCompletionListener() {
-        @Override
-        public void onCompletion(MediaPlayer mediaPLayer){
-            releaseMediaPlayer();
-        }
-    };
+    private AudioManager mAudioManager;
 
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
-            if( focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
                     focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-                //Pausar o audio
+
                 mMediaPlayer.pause();
                 mMediaPlayer.seekTo(0);
-            }else if (focusChange == AudioManager.AUDIOFOCUS_GAIN){
-                //Reproduz o audio
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                 mMediaPlayer.start();
-            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS){
-                //Para o audio
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                 releaseMediaPlayer();
             }
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.lista_palavras);
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
 
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+    public FamilyFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.lista_palavras, container, false);
+
+        mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         final ArrayList<Palavra> palavras = new ArrayList<>();
         palavras.add(new Palavra("Pai", "әpә", R.drawable.family_father, R.raw.family_father));
@@ -62,52 +65,44 @@ public class FamiliaActivity extends AppCompatActivity {
         palavras.add(new Palavra("Avó", "Ama", R.drawable.family_grandmother, R.raw.family_grandmother));
         palavras.add(new Palavra("Avô", "Paapa", R.drawable.family_grandfather, R.raw.family_grandfather));
 
-
-        //Percorre o array completamente e printa no log
-        //de que classe que o log vem e a mensagem que
-        //deve ser exibido
-        PalavraAdapter  intensAdapter = new PalavraAdapter(this, palavras, R.color.categoria_familia);
-
-        ListView listView = (ListView) findViewById(R.id.list);
+        PalavraAdapter  intensAdapter = new PalavraAdapter(getActivity(), palavras, R.color.categoria_familia);
+        ListView listView = (ListView) rootView.findViewById(R.id.list);
         listView.setAdapter(intensAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
                 Palavra palavraClicada = palavras.get(position);
                 releaseMediaPlayer();
 
                 int resultado = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener
                         , AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
-                if(resultado == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
-                    mMediaPlayer = MediaPlayer.create(FamiliaActivity.this,
-                            palavraClicada.getReferenciaAudio());
+                if (resultado == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+
+                    mMediaPlayer = MediaPlayer.create(getActivity(), palavraClicada.getReferenciaAudio());
+
                     mMediaPlayer.start();
 
-                    mMediaPlayer.setOnCompletionListener(mOnCompletionListener);
+                    mMediaPlayer.setOnCompletionListener(mCompletionListener);
                 }
             }
         });
+        return rootView;
     }
 
-    /**Metodo capaz de finalizar operaçoes quando o usuario deixa a aplicação */
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         releaseMediaPlayer();
     }
 
-    /**
-     * Libera o recurso de memoria utilizado pelo MediaPlayer.
-     * Se o media player for igual a null, diz que ele pode estar tocando um audio.
-     * */
-    private void releaseMediaPlayer(){
-        if(mMediaPlayer != null){
+    private void releaseMediaPlayer() {
+
+        if (mMediaPlayer != null) {
+
             mMediaPlayer.release();
             mMediaPlayer = null;
-
             mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }

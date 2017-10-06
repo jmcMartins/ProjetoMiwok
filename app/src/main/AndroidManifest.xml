@@ -16,14 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NumerosActivity"
-            android:label="@string/categoria_numeros"/>
-        <activity android:name=".FamiliaActivity"
-            android:label="@string/categoria_familia"/>
-        <activity android:name=".CoresActivity"
-            android:label="@string/categoria_cores"/>
-        <activity android:name=".FrasesActivity"
-            android:label="@string/categoria_frases"/>
     </application>
 
 </manifest>

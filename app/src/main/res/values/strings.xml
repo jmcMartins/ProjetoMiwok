@@ -4,4 +4,7 @@
     <string name="categoria_familia">Família</string>
     <string name="categoria_cores">Cores</string>
     <string name="categoria_frases">Frases</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
