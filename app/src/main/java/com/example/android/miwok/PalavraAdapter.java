@@ -10,20 +10,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-public class PalavraAdapter extends ArrayAdapter<Palavra> {
-
-    //private static final String LOG_TAG = PalavraAdapter.class.getSimpleName();
+public class PalavraAdapter extends ArrayAdapter<Palavra>
+{
     private int mCorFundo;
 
-    public PalavraAdapter(Activity context, ArrayList<Palavra> palavras, int corFundo) {
+    public PalavraAdapter(Activity context, ArrayList<Palavra> palavras, int corFundo)
+    {
         super(context, 0, palavras);
         mCorFundo = corFundo;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         View listItemView = convertView;
-        if(listItemView == null) {
+        if(listItemView == null)
+        {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.item_lista, parent, false);
         }
@@ -37,10 +39,12 @@ public class PalavraAdapter extends ArrayAdapter<Palavra> {
         padrao.setText(palavraAtual.getTraducaoPadrao());
 
         ImageView imagem = (ImageView) listItemView.findViewById(R.id.container_imagem);
-        if(palavraAtual.hasImagem()){
+        if(palavraAtual.hasImagem())
+        {
             imagem.setImageResource(palavraAtual.getReferenciaImagem());
             imagem.setVisibility(View.VISIBLE);
-        }else{
+        }else
+        {
             imagem.setVisibility(View.GONE);
         }
 

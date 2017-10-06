@@ -1,12 +1,6 @@
 package com.example.android.miwok;
 
-/**
- * Created by junio on 15/09/2017.
- */
-
 public class Palavra {
-
-
 
     private String mPalavraPadrao;
     private String mPalavraMiwok;
@@ -15,14 +9,16 @@ public class Palavra {
     private static final int SEM_IMAGEM_FORNECIDA = -1;
 
     public Palavra (String traducaoPadrao, String traducaoMiwok,
-                    int referenciaAudio){
+                    int referenciaAudio)
+    {
         mPalavraMiwok = traducaoMiwok;
         mPalavraPadrao = traducaoPadrao;
         mReferenciaAudio = referenciaAudio;
     }
 
     public Palavra (String traducaoPadrao, String traducaoMiwok,
-                    int referenciaImagem, int referenciaAudio){
+                    int referenciaImagem, int referenciaAudio)
+    {
         mPalavraMiwok = traducaoMiwok;
         mPalavraPadrao = traducaoPadrao;
         mReferenciaImagem = referenciaImagem;
@@ -32,7 +28,6 @@ public class Palavra {
     public boolean hasImagem() {
         return mReferenciaImagem != SEM_IMAGEM_FORNECIDA;
     }
-
     public String getTraducaoPadrao(){
         return mPalavraPadrao;
     }
@@ -41,5 +36,4 @@ public class Palavra {
     }
     public int getReferenciaImagem() {return mReferenciaImagem;}
     public int getReferenciaAudio() {return mReferenciaAudio;}
-
 }

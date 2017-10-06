@@ -39,7 +39,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
         }
     }
 
-    @Override
+    @Override/**Retorna a quantidade de abas em fragmentos.*/
     public int getCount() {
         return 4;
     }
