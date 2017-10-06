@@ -4,4 +4,4 @@ língua dos Miwoks.
   Como acompanhamento adicional, teremos auxílio visual e de áudio para que seja possível ao usuário entender em várias
 frentes um pouco mais sobre cada palavra ou sentença apresentada.
 
-  Projeto ofertado na disciplina de Desenvolvimento Mobile, Prof. Thiago Goia no IFTM Campus Ituiutaba.
+  Projeto ofertado na disciplina de Desenvolvimento Mobile, Prof. Thiago Gois no IFTM Campus Ituiutaba.
