@@ -10,7 +10,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
 
     private Context mContext;
 
-    /**Contrutor padrão da classe, passa o fragmento para sua super classe e salva o Context na classe*/
+    /**Contrutor padrao da classe, passa o fragmento para sua super classe e salva o Context na classe*/
     public CategoryAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
@@ -44,7 +44,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
         }
     }
 
-    /**Retorna a quantidade de fragmentos que o sistema vai possuit*/
+    /**Retorna a quantidade de fragmentos que o sistema vai possui*/
     @Override
     public int getCount() {
         return 4;
