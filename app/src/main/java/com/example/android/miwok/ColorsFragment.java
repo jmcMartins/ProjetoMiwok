@@ -12,8 +12,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**Classe do Fragmento de Cores, que herda os atributos de sua super classe*/
 public class ColorsFragment extends Fragmento
 {
+    /**Metodo capaz de enviar o Array e a cor para sua super classe com o conteudo desejado em seu fragmento*/
     public ColorsFragment()
     {
         ArrayList<Palavra> palavras = new ArrayList<>();

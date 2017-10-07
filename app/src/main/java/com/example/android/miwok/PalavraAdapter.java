@@ -10,16 +10,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 
+/**Classe para organizar o conteudo de acordo com a necessidade de cada tela*/
 public class PalavraAdapter extends ArrayAdapter<Palavra>
 {
     private int mCorFundo;
 
+    /**Contrutor da classe PalavraAdapter, mandando a Activity solicitada, o conteudo em Array e a cor desejada do fragmento*/
     public PalavraAdapter(Activity context, ArrayList<Palavra> palavras, int corFundo)
     {
         super(context, 0, palavras);
         mCorFundo = corFundo;
     }
 
+    /**Metodo responsavel de organizar toda a tela de acordo com suas caracteristicas.
+     * Colocando conteudo nas imagens, paravras e tudo que existe em determinada tela*/
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
@@ -53,5 +57,4 @@ public class PalavraAdapter extends ArrayAdapter<Palavra>
 
         return listItemView;
     }
-
 }

@@ -12,8 +12,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**Classe do Fragmento de Frases, que herda os atributos de sua super classe*/
 public class PhrasesFragment extends Fragmento
 {
+    /**Metodo capaz de enviar o Array e a cor para sua super classe com o conteudo desejado em seu fragmento*/
     public PhrasesFragment()
     {
         ArrayList<Palavra> palavras = new ArrayList<>();

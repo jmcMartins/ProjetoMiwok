@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**Classe da tela principal do aplicativo*/
 public class MainActivity extends AppCompatActivity
 {
+    /**Metodo capaz de iniciar todos os parametros do sistema*/
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

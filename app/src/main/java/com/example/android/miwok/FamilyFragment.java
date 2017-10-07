@@ -12,8 +12,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class FamilyFragment extends Fragmento {
-
+/**Classe do Fragmento de Familia, que herda os atributos de sua super classe*/
+public class FamilyFragment extends Fragmento
+{
+    /**Metodo capaz de enviar o Array e a cor para sua super classe com o conteudo desejado em seu fragmento*/
     public FamilyFragment()
     {
         ArrayList<Palavra> palavras = new ArrayList<>();

@@ -14,8 +14,10 @@ import java.util.ArrayList;
 
 import static com.example.android.miwok.R.id.miwok;
 
+/**Classe do Fragmento de Numeros, que herda os atributos de sua super classe*/
 public class NumbersFragment extends Fragmento
 {
+    /**Metodo capaz de enviar o Array e a cor para sua super classe com o conteudo desejado em seu fragmento*/
     public NumbersFragment()
     {
         ArrayList<Palavra> palavras = new ArrayList<>();

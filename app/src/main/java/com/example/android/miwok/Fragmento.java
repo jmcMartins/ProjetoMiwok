@@ -13,30 +13,21 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class Fragmento extends Fragment
+/**Super classe de Fragmentos, capaz de organizar e criar todas os Fragments do sistema, recebendo seus devidos conteudos.
+ * E executanto todos os devidos metodos necessarios pra isso*/
+public abstract class Fragmento extends Fragment
 {
+    /**Player de musica do aplicativo*/
     protected MediaPlayer mMediaPlayer;
+    /**Gerenciador de audio do aplicativo*/
     protected AudioManager mAudioManager;
 
+    /**Array com o conteudo para o Fragmento*/
     private ArrayList<Palavra> palavras = new ArrayList<>();
+    /**Cor padrao da tela no momento*/
     private String corPadrao;
 
-    @Override
-    public void onStop()
-    {
-        super.onStop();
-    }
-
-    protected void mandarArray(ArrayList<Palavra> _array)
-    {
-        palavras = _array;
-    }
-
-    protected void mandarCor(String _corPadrao)
-    {
-        corPadrao = _corPadrao;
-    }
-
+    /**Evento chamado quando o audio e completado*/
     protected MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener()
     {
         @Override
@@ -46,16 +37,9 @@ public class Fragmento extends Fragment
         }
     };
 
-    protected void releaseMediaPlayer()
-    {
-        if (mMediaPlayer != null)
-        {
-            mMediaPlayer.release();
-            mMediaPlayer = null;
-            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
-        }
-    }
-
+    /**Evento responsavel por pausar ou liberar a memoria do telefone usada pelo player.
+     * Ele faz isso quando o foco do aplicativo nao e mais no audio, ele pausa e retorna quando o foco do app voltar ao audio
+     * pode tambem caso o foco nao seja mais no app limpar a memoria usada pelo audio na memoria do aparelho*/
     protected AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener()
     {
         @Override
@@ -76,6 +60,39 @@ public class Fragmento extends Fragment
         }
     };
 
+    /**Metodo capaz de finalizar o audio quando o app e interrompido*/
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+    }
+
+    /**Metodo responsavel por receber o array com o conteudo da pagina e colocar na super classe*/
+    protected void mandarArray(ArrayList<Palavra> _array)
+    {
+        palavras = _array;
+    }
+
+    /**Metodo responsavel por receber a cor desejada na tela atual e colocar na super classe*/
+    protected void mandarCor(String _corPadrao)
+    {
+        corPadrao = _corPadrao;
+    }
+
+    /**Metodo responsavel por liberar a memoria usada pelo player, quando o app nao solicita mais o audio*/
+    protected void releaseMediaPlayer()
+    {
+        if (mMediaPlayer != null)
+        {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
+        }
+    }
+
+    /** Metodo capaz de iniciar a criacao do fragmento no momento, criando o gerenciador de audio
+     * Inicia tambem a visao para a lista e tudo que for preciso naquele momento para um bom funcionamento do app
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
